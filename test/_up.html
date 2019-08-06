@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EZUP UPLOAD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+  <style>
+    body {
+      background: rgb(138, 44, 226);
+    }
+
+
+
+    .box__dragndrop,
+    .box__uploading,
+    .box__success,
+    .box__error {
+      display: none;
+    }
+
+    .box {
+      position: relative;
+      padding: 20px 50px;
+      width: 50vw;
+      height: 50vh;
+      margin: auto;
+      margin-top: 15vh;
+    }
+
+    .box.has-advanced-upload {
+      border: 5px dashed white;
+      border-radius: 20px;
+    }
+
+    .box.is-dragover {
+      background: rgb(138, 120, 226);
+    }
+
+    .box label {
+      color: white;
+    }
+
+    .box p{
+      text-align: center;
+      color: rgba(255, 255, 255,0.5);
+      margin-top:25%;
+    }
+
+    #btn-container{
+      padding-top: 2em;
+      display: flex;
+      justify-content: center;
+    }
+
+
+    input[type='file'] {
+      display: none;
+    }
+
+
+    .btn-floating{
+      position: absolute;
+      bottom: 0;
+      right:0;
+    }
+  </style>
+
+
+
+  <form method="post" action="" enctype="multipart/form-data">
+    <div class="box">
+        <div class="box__input">
+            <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected"
+              multiple />
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+          </div>
+          <div class="box__uploading">Uploading&hellip;</div>
+          <div class="box__success">Done!</div>
+          <div class="box__error">Error! <span></span>.</div>
+      
+          <p>drag files here or press the + button</p>
+    </div>
+    <div id="btn-container">    
+      <button class="upload-btn btn waves-effect waves-light" type="submit" name="action">UPLOAD</button>
+    </div>
+
+  </form>
+
+  <script>
+
+    var isAdvancedUpload = function () {
+      var div = document.createElement('div');
+      return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window &&
+        'FileReader' in window;
+    }();
+
+    var form = document.querySelector(".box");
+
+    if (isAdvancedUpload) {
+      form.classList.add("has-advanced-upload");
+
+      var droppedFiles = false;
+
+      addListenerMulti(form, 'drag dragstart dragend dragover dragenter dragleave drop', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+
+      addListenerMulti(form, 'dragover dragenter', () => {
+        form.classList.add('is-dragover');
+      });
+
+      addListenerMulti(form, 'dragleave dragend drop', () => {
+        form.classList.remove('is-dragover');
+      });
+
+      form.addEventListener('drop', (e) => {
+        droppedFiles = e.originalEvent.dataTransfer.files;
+      });
+    }
+
+    function addListenerMulti(el, s, fn) {
+      s.split(' ').forEach(e => el.addEventListener(e, fn, false));
+    }
+
+
+
+    var fileInput = document.querySelector('.box__file');
+    var fabFileInput = document.querySelector('.btn-floating');
+
+
+    fabFileInput.addEventListener('click', function () {
+      fileInput.click();
+    });
+  </script>
+
+
+
+</body>
+
+</html>

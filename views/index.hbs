@@ -1,0 +1,70 @@
+    <style>
+        body {
+            background: blueviolet;
+        }
+
+        .title-container {
+            margin-top: 15%;
+        }
+
+
+        .title-container h1 {
+            text-align: center;
+            font-family: 'Exo', sans-serif;
+            color: white;
+            font-size: 5.5em;
+            margin-block-end: 0.3em;
+        }
+
+        .title-container h2 {
+            text-align: center;
+            font-family: 'Exo', sans-serif;
+            color: green;
+            font-size: 2em;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-group>div {
+            width: 40%;
+
+        }
+
+        .button-group a {
+            margin: auto;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            float: left;
+            width: 50%;
+            font-family: 'Exo', sans-serif;
+            border-radius: 15px 0 0 15px;
+        }
+
+        .button-group a:nth-child(2){
+            border-radius: 0 15px 15px 0;
+        }
+
+        .button-group a:nth-child(1) {
+            background: green;
+        }
+
+        .button-group a:nth-child(2) {
+            background: red;
+        }
+    </style>
+
+    <div class="title-container">
+        <h1>EZUP</h1>
+        <h2>The easy filesharing system</h2>
+    </div>
+
+    <div class="button-group">
+        <div>
+            <a href="/up" class="btn">UPLOAD</a>
+            <a href="/down" class="btn">DOWNLOAD</a>
+        </div>
+    </div>

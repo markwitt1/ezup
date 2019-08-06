@@ -1,0 +1,165 @@
+<style>
+    body {
+        background: rgb(138, 44, 226);
+    }
+
+
+
+    .box__dragndrop,
+    .box__uploading,
+    .box__success,
+    .box__error {
+        display: none;
+    }
+
+    .dropzone {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+
+        position: relative;
+        width: 50vw;
+        height: 50vh;
+        margin: auto;
+        margin-top: 15vh;
+
+        border: 5px dashed white;
+        border-radius: 20px;
+    }
+
+    .dropzone.dz-drag-hover {
+        background: rgb(138, 120, 226);
+    }
+
+    .dz-default {
+        display: none;
+    }
+
+    .dropzone label {
+        color: white;
+    }
+
+    .dropzone p {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 20%;
+        position: absolute;
+        margin-right: auto;
+        margin-left: auto;
+        left: 0;
+        right: 0;
+    }
+
+    #btn-container {
+        padding-top: 2em;
+        display: flex;
+        justify-content: center;
+    }
+
+
+
+
+    .btn-floating {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    #file {
+        display: none;
+    }
+</style>
+
+
+
+
+<form id="file-form" action="/up" class="dropzone" method="post" enctype="multipart/form-data">
+    <input type="file" name="files" id="file" multiple />
+    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+    <p>drag files here or press the + button</p>
+
+</form>
+
+<div id="btn-container">
+    <button type="submit" form="file-form" class="upload-btn btn waves-effect waves-light">UPLOAD</button>
+</div>
+
+<script src="./../js/setCookie.js"></script>
+
+<script src="./../js/lib/dropzone.js"></script>
+
+
+
+<script>
+
+    Dropzone.options.fileForm = {
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        init: function () {
+
+            var myDropzone = this;
+
+            this.on("sending", (file, xhr, formData) => {
+                formData.append('userName', 'bob');
+            })
+
+            this.on("success", () => {
+                myDropzone.options.autoProcessQueue = true;
+            });
+
+            this.on("queuecomplete", () => {
+                myDropzone.options.autoProcessQueue = false;
+            });
+
+            this.on("complete", (file) => {
+                if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                    window.location.href = "http://localhost:3000/up/success";
+                }
+            })
+
+            var uploadBtn = document.querySelector('.upload-btn');
+            uploadBtn.addEventListener("click", e => {
+                console.log(myDropzone.files);
+                e.preventDefault();
+                myDropzone.processQueue();
+            });
+
+
+
+
+
+        }
+    }
+
+    var input = document.getElementById('file');
+    input.addEventListener('drop', function (e) {
+        console.log(e.dataTransfer.getData('text'));
+    });
+
+
+
+
+    var form = document.getElementById("file-form");
+
+    function addListenerMulti(el, s, fn) {
+        s.split(' ').forEach(e => el.addEventListener(e, fn, false));
+    }
+
+
+
+    var fileInput = document.getElementById('file')
+    var fabFileInput = document.querySelector('.btn-floating');
+
+
+    fabFileInput.addEventListener('click', function () {
+        form.click();
+    });
+
+
+
+
+
+
+    
+</script>

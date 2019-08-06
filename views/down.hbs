@@ -1,0 +1,38 @@
+<style>
+    body {
+        background: blueviolet;
+    }
+
+    h1{
+     text-align: center;
+     color: white;
+    }
+    h1 a{
+        color: green;
+    }
+
+    #code{
+        width : 20vw;
+        text-align: center;
+    }
+
+    form{
+        margin-top:15vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #submit{
+        color:white;
+    }
+
+</style>
+
+<h1>ENTER THE CODE YOU OBTAINED FROM THE <a href="/up">UPLOADS</a> SECTION:</h1>
+
+<form action="/down" method="POST">
+        <input id="code" type="text" name="code" placeholder="enter code here">
+        <input id="submit" type="submit" value="Submit" class="btn waves-effect waves-light">
+</form>
