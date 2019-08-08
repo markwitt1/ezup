@@ -1,5 +1,6 @@
 # Description
-A simple, extremely easy to use file sharing system. Please give me tips so I can improve stuff
+A simple, extremely easy to use file sharing system. Please give me tips so I can improve stuff.
+You can upload files to the server using dropzone.js. You will get a unique code from a postgres database. By entering this code, you can download your files as zip and the entry will automatically get deleted.
 
 # Installation
 to run this project, you have to install node.js (http://nodejs.org)
