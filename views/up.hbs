@@ -114,7 +114,7 @@
 
             this.on("complete", (file) => {
                 if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-                    window.location.href = "http://localhost:3000/up/success";
+                    window.location.href = "/up/success";
                 }
             })
 
