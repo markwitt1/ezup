@@ -1,6 +1,11 @@
 var { Client } = require("pg");
 require("dotenv").config();
-const client = new Client();
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 var connect = function () {
   client
